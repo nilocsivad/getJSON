@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- com.iam_vip.generate_json.gj.backend.table.GJJsonLink -->
+<mapper namespace="com.iam_vip.test.mysql_cluster.database.access.layout.IDALCustomer">
+
+	<sql id="TABLE_NAME"> db1_customer </sql>
+	<parameterMap type="com.iamVip.getJSON.logic.model.Clientele" id="Clientele"></parameterMap>
+	<resultMap type="com.iamVip.getJSON.logic.model.Clientele" id="ClienteleMap" autoMapping="true"></resultMap>
+
+
+
+	<insert id="insert" parameterMap="Clientele">
+		INSERT INTO
+		<include refid="TABLE_NAME" />
+		( clientName, company, link, status )
+		VALUES
+		( #{clientName}, #{company}, #{link}, #{status} )
+	</insert>
+
+	<insert id="inserts">
+		INSERT INTO
+		<include refid="TABLE_NAME" />
+		( clientName, company, link, status )
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+			( #{clientName}, #{company}, #{link}, #{status} )
+		</foreach>
+	</insert>
+
+
+
+	<delete id="deleteByKey">
+		DELETE FROM
+		<include refid="TABLE_NAME" />
+		WHERE clientID = #{primaryKey}
+	</delete>
+
+	<delete id="deleteEq">
+		DELETE FROM
+		<include refid="TABLE_NAME" />
+		WHERE
+		<trim prefixOverrides="AND">
+			<if test="clientName != null and clientName != ''"> AND clientName = #{clientName} </if>
+			<if test="company != null and company != ''"> AND company = #{company} </if>
+			<if test="link != null and link != ''"> AND link = #{link} </if>
+			<if test="status != null and status != ''"> AND status = #{status} </if>
+		</trim>
+	</delete>
+
+
+
+	<update id="updateByKey">
+		UPDATE
+		<include refid="TABLE_NAME" />
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="clientName != null and clientName != ''"> , clientName LIKE CONCAT( '%', '${clientName}', '%' ) </if>
+			<if test="company != null and company != ''"> , company LIKE CONCAT( '%', '${company}', '%' ) </if>
+			<if test="link != null and link != ''"> , link LIKE CONCAT( '%', '${link}', '%' ) </if>
+			<if test="status != null and status != ''"> , status = #{status} </if>
+		</trim>
+		WHERE clientID = #{primaryKey}
+	</update>
+
+
+
+	<select id="queryCount" resultType="java.lang.Long">
+		SELECT COUNT(*) FROM
+		<include refid="TABLE_NAME" />
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="clientName != null and clientName != ''"> AND clientName LIKE CONCAT( '%', '${clientName}', '%' ) </if>
+			<if test="company != null and company != ''"> AND company LIKE CONCAT( '%', '${company}', '%' ) </if>
+			<if test="link != null and link != ''"> AND link LIKE CONCAT( '%', '${link}', '%' ) </if>
+			<if test="status != null and status != ''"> AND status = #{status} </if>
+		</trim>
+	</select>
+
+	<select id="queryCountEq" resultType="java.lang.Long">
+		SELECT COUNT(*) FROM
+		<include refid="TABLE_NAME" />
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="clientName != null and clientName != ''"> AND clientName = #{clientName} </if>
+			<if test="company != null and company != ''"> AND company = #{company} </if>
+			<if test="link != null and link != ''"> AND link = #{link} </if>
+			<if test="status != null and status != ''"> AND status = #{status} </if>
+		</trim>
+	</select>
+
+
+
+</mapper>

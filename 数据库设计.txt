@@ -1,0 +1,27 @@
+
+######################################################
+# 创建数据库
+######################################################
+CREATE DATABASE `db-json` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+
+######################################################
+# 客户表
+######################################################
+CREATE TABLE `clientele` (
+  `clientID` int(10) unsigned NOT NULL DEFAULT '10000',
+  `clientName` varchar(96) NOT NULL,
+  `company` varchar(128) DEFAULT NULL,
+  `link` varchar(64) DEFAULT NULL,
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1->normal   0->deleted',
+  PRIMARY KEY (`clientID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='client';
+
+######################################################
+# 插入客户表一条记录
+######################################################
+INSERT INTO `db-json`.`clientele` (`clientName`, `company`, `link`, `status`) VALUES ('北京木易科技信息技术有限公司', '北京木易科技信息技术有限公司', 'http://www.iam-vip.com', '1');
+
+
+
+
