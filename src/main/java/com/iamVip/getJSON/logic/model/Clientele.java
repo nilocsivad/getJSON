@@ -3,12 +3,10 @@
  */
 package com.iamVip.getJSON.logic.model;
 
-import java.io.Serializable;
-
 /**
  * @author Colin
  */
-public class Clientele implements Serializable {
+public class Clientele extends __Model {
 
 	/**
 	 * 

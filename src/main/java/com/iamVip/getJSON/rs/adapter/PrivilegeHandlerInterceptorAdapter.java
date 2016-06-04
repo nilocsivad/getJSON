@@ -21,8 +21,6 @@ import com.iamVip.getJSON.rs.util.MethodUtil;
  */
 public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapter implements IAPP {
 
-	private String REDIRECT; // ** 根目录 URI
-
 	/**
 	 * 
 	 */
@@ -31,36 +29,28 @@ public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapte
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.springframework.web.servlet.handler.HandlerInterceptorAdapter#
 	 * preHandle(javax.servlet.http.HttpServletRequest,
 	 * javax.servlet.http.HttpServletResponse, java.lang.Object)
 	 */
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		
-		StringBuffer buf = new StringBuffer();
-		buf.append("RequestURI " + request.getRequestURI());
 
-		System.out.println("RequestURI " + request.getRequestURI());
-		System.out.println("RequestURL " + request.getRequestURL());
+		StringBuffer buf = new StringBuffer();
+		buf.append("RequestURI " + request.getRequestURI() + LINE);
+		buf.append("RequestURL " + request.getRequestURL() + LINE);
+		System.out.println(buf);
 
 		// ** 匹配到需要拦截的 URL
 
 		if (handler instanceof HandlerMethod) {
-			// <backend-control-area>
 
 			HandlerMethod method = (HandlerMethod) handler;
-			String className = method.getBean().getClass().getName(); // **
-																		// Controller
-																		// 的类名
-			String methodName = method.getMethod().getName(); // ** Controller
-																// 里执行的方法名称
+			String className = method.getBean().getClass().getName(); // Controller
+																		 // 的类名
+			String methodName = method.getMethod().getName(); // Controller
+																 // 里执行的方法名称
 			System.out.println("Execute " + className + "." + methodName);
-
-			if (REDIRECT == null) {
-				REDIRECT = request.getContextPath();
-			}
 
 			{ // ** 过滤掉配置忽略的请求
 				boolean ignore = false;
@@ -84,7 +74,7 @@ public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapte
 			}
 			else if (className.startsWith(FRONTEND)) {
 				// <facade-control-area>
-				return this.controlURL(request, response, ONLINE_CUSTOMER);
+				return this.controlURL(request, response, ONLINE_CLIENTELE);
 				// </facade-control-area>
 			}
 		}
@@ -99,12 +89,14 @@ public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapte
 	 * @throws IOException
 	 */
 	private boolean controlURL(HttpServletRequest request, HttpServletResponse response, String sessionKey) throws IOException {
+		
+		String contextPath = request.getContextPath();
 
 		HttpSession httpSession = request.getSession(false);
 		// ** 未登录则不通过
 		if (httpSession == null) {
 			System.out.println("111111111111111111111111111111111111  httpSession == null");
-			response.sendRedirect(REDIRECT);
+			response.sendRedirect(contextPath);
 			return false;
 		}
 
@@ -112,7 +104,7 @@ public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapte
 		Object onlineObj = httpSession.getAttribute(sessionKey);
 		if (onlineObj == null) {
 			System.out.println("222222222222222222222222222222222222 onlineObj == null");
-			response.sendRedirect(REDIRECT);
+			response.sendRedirect(contextPath);
 			return false;
 		}
 
@@ -120,7 +112,7 @@ public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapte
 		long lastAccessed = httpSession.getLastAccessedTime();
 		if (System.currentTimeMillis() - lastAccessed > 30 * 60 * 1000) {
 			System.out.println("333333333333333333333333333333333333 lastAccessed > 30 * 60 * 1000");
-			response.sendRedirect(REDIRECT);
+			response.sendRedirect(contextPath);
 			return false;
 		}
 
@@ -129,7 +121,6 @@ public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapte
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.springframework.web.servlet.handler.HandlerInterceptorAdapter#
 	 * postHandle(javax.servlet.http.HttpServletRequest,
 	 * javax.servlet.http.HttpServletResponse, java.lang.Object,
@@ -143,7 +134,6 @@ public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapte
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.springframework.web.servlet.handler.HandlerInterceptorAdapter#
 	 * afterCompletion(javax.servlet.http.HttpServletRequest,
 	 * javax.servlet.http.HttpServletResponse, java.lang.Object,
@@ -157,7 +147,6 @@ public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapte
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.springframework.web.servlet.handler.HandlerInterceptorAdapter#
 	 * afterConcurrentHandlingStarted(javax.servlet.http.HttpServletRequest,
 	 * javax.servlet.http.HttpServletResponse, java.lang.Object)

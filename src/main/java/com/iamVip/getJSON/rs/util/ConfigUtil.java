@@ -3,8 +3,6 @@
  */
 package com.iamVip.getJSON.rs.util;
 
-import java.beans.ConstructorProperties;
-
 /**
  * @author Colin
  */
@@ -21,7 +19,7 @@ public class ConfigUtil {
 	 * debug flag (or don’t want to) you can use @ConstructorProperties JDK
 	 * annotation to explicitly name your constructor arguments.
 	 */
-	@ConstructorProperties({ "message" })
+	// @ConstructorProperties({...})
 	public ConfigUtil(String message, String defaultURL, String forwardURL) {
 		MESSAGE = message;
 		DEFAULTURL = defaultURL;

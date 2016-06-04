@@ -11,6 +11,8 @@ import com.google.gson.Gson;
  */
 public interface IAPP {
 
+	String LINE = "\r\n";
+
 	String JSON_KEY = "key";
 	String JSON_RESULT_KEY = "result";
 	String JSON_EXTRA_KEY = "extra";
@@ -21,7 +23,7 @@ public interface IAPP {
 	String FRONTEND = "com.iam_vip.generate_json.act.facade";
 
 	String ONLINE_MANAGER = "manager";
-	String ONLINE_CUSTOMER = "customer";
+	String ONLINE_CLIENTELE = "clientele";
 
 	Gson gson = new Gson();
 

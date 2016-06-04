@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- com.iam_vip.generate_json.gj.backend.table.GJJsonLink -->
-<mapper namespace="com.iam_vip.test.mysql_cluster.database.access.layout.IDALCustomer">
+<!-- com.iamVip.getJSON.logic.model.Clientele -->
+<mapper namespace="com.iamVip.getJSON.database.access.layout.IClienteleDBApi">
 
-	<sql id="TABLE_NAME"> db1_customer </sql>
+	<sql id="TABLE_NAME"> clientele </sql>
 	<parameterMap type="com.iamVip.getJSON.logic.model.Clientele" id="Clientele"></parameterMap>
 	<resultMap type="com.iamVip.getJSON.logic.model.Clientele" id="ClienteleMap" autoMapping="true"></resultMap>
 
