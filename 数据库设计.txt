@@ -15,6 +15,7 @@ CREATE TABLE `clientele` (
   `company` varchar(128) DEFAULT NULL,
   `link` varchar(128) DEFAULT NULL,
   `maxTemplate` tinyint(4) DEFAULT '10',
+  `dateTime` char(19) DEFAULT NULL,
   `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1->normal   0->deleted',
   PRIMARY KEY (`clientID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10004 DEFAULT CHARSET=utf8 COMMENT='client';
@@ -39,6 +40,7 @@ CREATE TABLE `login` (
   `password` char(32) NOT NULL COMMENT 'MD5',
   `clientID` int(11) NOT NULL,
   `type` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1->Email   2->QQ   3->weibo   4->facebook   5->loginName',
+  `dateTime` char(19) DEFAULT NULL,
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '1->normal   0->unauthorized   2->expired',
   PRIMARY KEY (`loginName`),
   UNIQUE KEY `loginName_UNIQUE` (`loginName`),
@@ -71,6 +73,7 @@ CREATE TABLE `template` (
   `type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0->xml   1->',
   `suffix` varchar(128) NOT NULL,
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0->normal   1->deleted',
+  `dateTime` char(19) DEFAULT NULL,
   `what` tinytext,
   PRIMARY KEY (`templateID`),
   KEY `FK___template_clientele___clientID_idx` (`clientID`),

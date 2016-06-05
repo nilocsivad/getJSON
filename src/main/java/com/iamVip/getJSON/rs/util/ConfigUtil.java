@@ -11,6 +11,8 @@ public class ConfigUtil {
 	private static String MESSAGE;
 	private static String DEFAULTURL;
 	private static String FORWARDURL;
+	private static Integer MAXTEMPLATE;
+	private static Integer OFFMINUTES;
 
 	/**
 	 * Keep in mind that to make this work out of the box your code must be
@@ -20,10 +22,12 @@ public class ConfigUtil {
 	 * annotation to explicitly name your constructor arguments.
 	 */
 	// @ConstructorProperties({...})
-	public ConfigUtil(String message, String defaultURL, String forwardURL) {
+	public ConfigUtil(String message, String defaultURL, String forwardURL, Integer maxTemplate, Integer offMinutes) {
 		MESSAGE = message;
 		DEFAULTURL = defaultURL;
 		FORWARDURL = forwardURL;
+		MAXTEMPLATE = maxTemplate;
+		OFFMINUTES = offMinutes;
 	}
 
 	/**
@@ -45,6 +49,20 @@ public class ConfigUtil {
 	 */
 	public static String getForwardURL() {
 		return FORWARDURL;
+	}
+
+	/**
+	 * @return the maxTemplate
+	 */
+	public static Integer getMaxTemplate() {
+		return MAXTEMPLATE;
+	}
+
+	/**
+	 * @return the offMinutes
+	 */
+	public static Integer getOffMinutes() {
+		return OFFMINUTES;
 	}
 
 }

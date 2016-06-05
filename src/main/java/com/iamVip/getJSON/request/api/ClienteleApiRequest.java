@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.iamVip.getJSON.logic.iapi.IClienteleApi;
 import com.iamVip.getJSON.logic.model.Clientele;
+import com.iamVip.getJSON.logic.model.Login;
 import com.iamVip.getJSON.request.__Request;
 import com.iamVip.getJSON.rs.c.IAPP;
 
@@ -51,14 +52,14 @@ public class ClienteleApiRequest extends __Request implements IAPP {
 
 	@ResponseBody
 	@RequestMapping(value = { "more" })
-	public Map<String, Object> moreClientele(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception {
+	public Map<String, Object> moreClientele(HttpServletRequest request, HttpSession session, HttpServletResponse response, Clientele client, Login login) throws Exception {
 
-		Clientele one = Clientele.testOne();
-		int len = clienteleApi.insert(one);
+		Map<String, Object> refMap = new HashMap<String, Object>(3);
+		int r = clienteleApi.moreClientele(client, login, refMap);
 
 		Map<String, Object> map = new HashMap<String, Object>(3);
-		map.put("len", len);
-		map.put("one", one);
+		map.put(JSON_KEY, r);
+		map.put(JSON_RESULT_KEY, refMap);
 		return map;
 	}
 

@@ -3,6 +3,7 @@
  */
 package com.iamVip.getJSON.logic.model;
 
+import com.iamVip.getJSON.rs.util.ConfigUtil;
 import com.iamVip.getJSON.rs.util.TokenUtil;
 
 /**
@@ -39,6 +40,24 @@ public class Token extends __Model {
 		instance.token = TokenUtil.getToken();
 		instance.clientID = 10000;
 		instance.timeMillis = System.currentTimeMillis();
+		return instance;
+	}
+
+	/**
+	 * @return
+	 */
+	public static Token newOne(int clientID) {
+		return newOne(clientID, ConfigUtil.getOffMinutes());
+	}
+
+	/**
+	 * @return
+	 */
+	public static Token newOne(int clientID, int minutes) {
+		Token instance = new Token();
+		instance.token = TokenUtil.getToken();
+		instance.clientID = clientID;
+		instance.timeMillis = System.currentTimeMillis() + (minutes * 60 * 1000);
 		return instance;
 	}
 

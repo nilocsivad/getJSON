@@ -5,6 +5,8 @@ package com.iamVip.getJSON.logic.api.impl;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.iamVip.getJSON.database.access.layout.__IDBAPI;
 import com.iamVip.getJSON.logic.iapi.__IAPI;
 import com.iamVip.getJSON.rs.ref.PageParam;
@@ -28,6 +30,7 @@ public abstract class __APIDefaultImpl<T> implements __IAPI<T> {
 	 * @see com.iamVip.getJSON.logic.iapi.__IAPI#insert(java.lang.Object)
 	 */
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int insert(T one) {
 		return this.getDBApi().insert(one);
 	}

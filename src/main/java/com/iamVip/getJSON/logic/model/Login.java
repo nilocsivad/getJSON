@@ -48,6 +48,13 @@ public class Login extends __Model {
 	}
 
 	/**
+	 * MD5加密密码
+	 */
+	public void password2md5() {
+		this.password = MD5Util.getMD5(this.password);
+	}
+
+	/**
 	 * @return the loginName
 	 */
 	public String getLoginName() {
@@ -72,7 +79,7 @@ public class Login extends __Model {
 	 * @param password the password to set
 	 */
 	public void setPassword(String password) {
-		this.password = MD5Util.getMD5(password);
+		this.password = password;
 	}
 
 	/**

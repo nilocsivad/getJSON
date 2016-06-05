@@ -3,7 +3,7 @@
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
@@ -13,26 +13,24 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
 		">
 
-
-	<!-- <context:component-scan base-package="com.iam_vip.generate_json"> -->
-	<!-- <context:exclude-filter type="regex" expression="com.iam_vip.generate_json.action" /> -->
-	<!-- </context:component-scan> -->
-
-
-
-
 	<context:property-placeholder location="classpath:config/datasource-mysql.properties" />
 
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" p:driverClassName="${jdbc.driverClassName}" p:url="${mysql.url}" p:username="${mysql.username}" p:password="${mysql.password}" />
+	<bean id="mysqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${mysql.url}" />
+		<property name="username" value="${mysql.username}" />
+		<property name="password" value="${mysql.password}" />
+	</bean>
 
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource" />
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="mysqlDataSource" />
+	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:annotation-driven transaction-manager="txManager" />
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
+	<bean id="mysqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="mysqlDataSource" />
 		<property name="transactionFactory">
-			<!-- <bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" /> -->
 			<bean class="org.mybatis.spring.transaction.SpringManagedTransactionFactory" />
 		</property>
 		<property name="mapperLocations">
@@ -41,11 +39,15 @@
 			</list>
 		</property>
 	</bean>
+<!-- 
+	<bean class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="mysqlSessionFactory" />
+	</bean> -->
 
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:sqlSessionFactoryBeanName="sqlSessionFactory">
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="mysqlSessionFactory" />
 		<property name="basePackage" value="com.iamVip.getJSON.database.access.layout" />
 	</bean>
-
 
 
 
@@ -74,6 +76,10 @@
 		<constructor-arg name="defaultURL" type="java.lang.String" value="" />
 		<!-- 后台跳转URL,管理界面 -->
 		<constructor-arg name="forwardURL" type="java.lang.String" value="" />
+		<!-- 最大JSON模版数目 -->
+		<constructor-arg name="maxTemplate" type="java.lang.Integer" value="10" />
+		<!-- TOKEN过期时间 -->
+		<constructor-arg name="offMinutes" type="java.lang.Integer" value="300" />
 	</bean>
 
 	<!-- 过滤URL及对应Method -->
