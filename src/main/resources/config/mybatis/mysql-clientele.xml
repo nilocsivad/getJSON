@@ -10,53 +10,31 @@
 
 
 
-	<insert id="insert" parameterMap="Clientele">
+	<insert id="insert" parameterMap="Clientele" keyProperty="clientID" keyColumn="clientID" useGeneratedKeys="true">
 		INSERT INTO
 		<include refid="TABLE_NAME" />
-		( clientName, company, link, status )
+		( clientName, company, link, maxTemplate, status )
 		VALUES
-		( #{clientName}, #{company}, #{link}, #{status} )
+		( #{clientName}, #{company}, #{link}, #{maxTemplate}, #{status} )
 	</insert>
-
-	<insert id="inserts">
-		INSERT INTO
-		<include refid="TABLE_NAME" />
-		( clientName, company, link, status )
-		VALUES
-		<foreach collection="list" item="item" separator=",">
-			( #{clientName}, #{company}, #{link}, #{status} )
-		</foreach>
-	</insert>
+	<!-- <insert id="inserts"> INSERT INTO <include refid="TABLE_NAME" /> ( clientName, company, link, status ) VALUES <foreach collection="list" item="item" separator=","> ( #{clientName}, #{company}, #{link}, #{status} ) </foreach> </insert> -->
 
 
 
-	<delete id="deleteByKey">
-		DELETE FROM
-		<include refid="TABLE_NAME" />
-		WHERE clientID = #{primaryKey}
-	</delete>
-
-	<delete id="deleteEq">
-		DELETE FROM
-		<include refid="TABLE_NAME" />
-		WHERE
-		<trim prefixOverrides="AND">
-			<if test="clientName != null and clientName != ''"> AND clientName = #{clientName} </if>
-			<if test="company != null and company != ''"> AND company = #{company} </if>
-			<if test="link != null and link != ''"> AND link = #{link} </if>
-			<if test="status != null and status != ''"> AND status = #{status} </if>
-		</trim>
-	</delete>
+	<!-- <delete id="deleteByKey"> DELETE FROM <include refid="TABLE_NAME" /> WHERE clientID = #{primaryKey} </delete> -->
+	<!-- <delete id="deleteEq"> DELETE FROM <include refid="TABLE_NAME" /> WHERE <trim prefixOverrides="AND"> <if test="clientName != null and clientName != ''"> AND clientName = #{clientName} </if> <if test="company != null and company != ''"> AND company = #{company} </if> <if test="link != null and link != ''"> AND link = #{link} </if> <if test="status != null and status != ''"> AND status = #{status} </if> </trim> </delete> -->
 
 
 
 	<update id="updateByKey">
 		UPDATE
 		<include refid="TABLE_NAME" />
-		<trim prefix="SET" prefixOverrides=",">
+		SET
+		<trim prefixOverrides=",">
 			<if test="clientName != null and clientName != ''"> , clientName LIKE CONCAT( '%', '${clientName}', '%' ) </if>
 			<if test="company != null and company != ''"> , company LIKE CONCAT( '%', '${company}', '%' ) </if>
 			<if test="link != null and link != ''"> , link LIKE CONCAT( '%', '${link}', '%' ) </if>
+			<if test="maxTemplate != null and maxTemplate != ''"> , maxTemplate = #{maxTemplate} </if>
 			<if test="status != null and status != ''"> , status = #{status} </if>
 		</trim>
 		WHERE clientID = #{primaryKey}
@@ -71,6 +49,7 @@
 			<if test="clientName != null and clientName != ''"> AND clientName LIKE CONCAT( '%', '${clientName}', '%' ) </if>
 			<if test="company != null and company != ''"> AND company LIKE CONCAT( '%', '${company}', '%' ) </if>
 			<if test="link != null and link != ''"> AND link LIKE CONCAT( '%', '${link}', '%' ) </if>
+			<if test="maxTemplate != null and maxTemplate != ''"> AND maxTemplate = #{maxTemplate} </if>
 			<if test="status != null and status != ''"> AND status = #{status} </if>
 		</trim>
 	</select>
@@ -82,6 +61,7 @@
 			<if test="clientName != null and clientName != ''"> AND clientName = #{clientName} </if>
 			<if test="company != null and company != ''"> AND company = #{company} </if>
 			<if test="link != null and link != ''"> AND link = #{link} </if>
+			<if test="maxTemplate != null and maxTemplate != ''"> AND maxTemplate = #{maxTemplate} </if>
 			<if test="status != null and status != ''"> AND status = #{status} </if>
 		</trim>
 	</select>

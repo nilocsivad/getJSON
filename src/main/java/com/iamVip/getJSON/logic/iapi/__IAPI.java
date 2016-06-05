@@ -5,7 +5,7 @@ package com.iamVip.getJSON.logic.iapi;
 
 import java.util.List;
 
-import com.iamVip.getJSON.logic.model.PageParam;
+import com.iamVip.getJSON.rs.ref.PageParam;
 
 /**
  * @author Colin

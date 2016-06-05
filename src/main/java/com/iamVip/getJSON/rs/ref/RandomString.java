@@ -39,4 +39,11 @@ public class RandomString {
 		return buf.toString();
 	}
 
+	/**
+	 * @return
+	 */
+	public static String random() {
+		return new RandomString().toString();
+	}
+
 }

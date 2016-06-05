@@ -3,6 +3,8 @@
  */
 package com.iamVip.getJSON.logic.model;
 
+import com.iamVip.getJSON.rs.ref.RandomString;
+
 /**
  * @author Colin
  */
@@ -22,14 +24,28 @@ public class Clientele extends __Model {
 
 
 	private Integer clientID;
-	private String clientName;
-	private String company;
-	private String link;
+	private String clientName; // 客户名称 最大长度96 不能为空 varchar(96)
+	private String company; // 公司名称 最大程度 128 varchar(128)
+	private String link; // 公司网址 最大程度 128 varchar(128)
+	private Integer maxTemplate; // 拥有JSON模版数量 默认10 最大9999 tinyint(4)
 	private Integer status; // 1->normal 0->deleted
 
 
 
 
+
+	/**
+	 * @return
+	 */
+	public static Clientele testOne() {
+		Clientele instance = new Clientele();
+		instance.clientName = RandomString.random();
+		instance.company = RandomString.random();
+		instance.link = "http://" + RandomString.random() + ".com";
+		instance.maxTemplate = 10;
+		instance.status = 1;
+		return instance;
+	}
 
 	/**
 	 * @return the clientID
@@ -106,6 +122,20 @@ public class Clientele extends __Model {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	/**
+	 * @return the maxTemplate
+	 */
+	public Integer getMaxTemplate() {
+		return maxTemplate;
+	}
+
+	/**
+	 * @param maxTemplate the maxTemplate to set
+	 */
+	public void setMaxTemplate(Integer maxTemplate) {
+		this.maxTemplate = maxTemplate;
 	}
 
 }

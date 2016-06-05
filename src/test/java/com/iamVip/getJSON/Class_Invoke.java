@@ -1,11 +1,11 @@
 /**
  * 
  */
-
+package com.iamVip.getJSON;
 
 import java.lang.reflect.Field;
 
-import com.iamVip.getJSON.logic.model.Clientele;
+import com.iamVip.getJSON.logic.model.*;
 
 /**
  * @author Colin
@@ -23,7 +23,7 @@ public class Class_Invoke {
 
 		String line = "\r\n-----------------------------------------";
 
-		Object obj = new Clientele();
+		Object obj = new Token();
 		Class<?> cls = obj.getClass();
 		Field[] fields = cls.getDeclaredFields();
 
@@ -49,6 +49,12 @@ public class Class_Invoke {
 		for (Field field : fields) {
 			String f = field.getName();
 			System.out.println("\t\t\t<if test=\"" + f + " != null and " + f + " != ''\"> AND " + f + " = #{" + f + "} </if>");
+		}
+		
+		System.out.println(line);
+		for (Field field : fields) {
+			String f = field.getName();
+			System.out.println("\t\t\t<if test=\"" + f + " != null and " + f + " != ''\"> , " + f + " = #{" + f + "} </if>");
 		}
 
 	}

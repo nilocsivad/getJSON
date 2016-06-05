@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.iamVip.getJSON.logic.model;
+package com.iamVip.getJSON.rs.ref;
 
 import java.io.Serializable;
 
