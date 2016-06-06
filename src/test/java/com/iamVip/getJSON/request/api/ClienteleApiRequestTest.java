@@ -49,6 +49,11 @@ public class ClienteleApiRequestTest {
 		this.executeHttp("/api/clientele/query/count");
 	}
 
+	@Test
+	public void queryLimit() throws Exception {
+		this.executeHttp("/api/clientele/query");
+	}
+
 
 
 
