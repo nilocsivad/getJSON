@@ -9,7 +9,7 @@ CREATE DATABASE `db-json` /*!40100 DEFAULT CHARACTER SET utf8 */;
 ######################################################
 # 客户表
 ######################################################
-CREATE TABLE `clientele` (
+CREATE TABLE `db-json`.`clientele` (
   `clientID` int(10) NOT NULL AUTO_INCREMENT,
   `clientName` varchar(96) NOT NULL,
   `company` varchar(128) DEFAULT NULL,
@@ -35,7 +35,7 @@ INSERT INTO `db-json`.`clientele` (`clientID`, `clientName`, `company`, `link`, 
 ######################################################
 # 登录信息表
 ######################################################
-CREATE TABLE `login` (
+CREATE TABLE `db-json`.`login` (
   `loginName` varchar(48) NOT NULL,
   `password` char(32) NOT NULL COMMENT 'MD5',
   `clientID` int(11) NOT NULL,
@@ -53,11 +53,11 @@ CREATE TABLE `login` (
 ######################################################
 # 登录TOKEN信息
 ######################################################
-CREATE TABLE `token` (
+CREATE TABLE `db-json`.`token` (
   `token` char(32) NOT NULL,
   `clientID` int(11) NOT NULL,
-  `timeMillis` int(13) NOT NULL,
-  PRIMARY KEY (`token`),
+  `timeMillis` bigint(13) NOT NULL,
+  PRIMARY KEY (`clientID`),
   KEY `FK___token_clientele___clientID_idx` (`clientID`),
   CONSTRAINT `FK___token_clientele___clientID` FOREIGN KEY (`clientID`) REFERENCES `clientele` (`clientID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -67,7 +67,7 @@ CREATE TABLE `token` (
 ######################################################
 # JSON模版数据表
 ######################################################
-CREATE TABLE `template` (
+CREATE TABLE `db-json`.`template` (
   `templateID` int(11) NOT NULL AUTO_INCREMENT,
   `clientID` int(11) NOT NULL,
   `type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0->xml   1->',

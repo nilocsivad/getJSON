@@ -13,9 +13,9 @@
 	<insert id="insert" parameterMap="Template" keyProperty="clientID" keyColumn="clientID" useGeneratedKeys="true">
 		INSERT INTO
 		<include refid="TABLE_NAME" />
-		( clientID, type, suffix, status, what )
+		( clientID, type, suffix, status, dateTime, what )
 		VALUES
-		( #{clientID}, #{type}, #{suffix}, #{status}, #{what} )
+		( #{clientID}, #{type}, #{suffix}, #{status}, #{dateTime}, #{what} )
 	</insert>
 
 
@@ -29,6 +29,7 @@
 			<if test="type != null and type != ''"> , type = #{type} </if>
 			<if test="suffix != null and suffix != ''"> , suffix = #{suffix} </if>
 			<if test="status != null and status != ''"> , status = #{status} </if>
+			<if test="dateTime != null and dateTime != ''"> , dateTime = #{dateTime} </if>
 			<if test="what != null and what != ''"> , what = #{what} </if>
 		</trim>
 		WHERE templateID = #{primaryKey}
@@ -44,6 +45,7 @@
 			<if test="type != null and type != ''"> AND type = #{type} </if>
 			<if test="suffix != null and suffix != ''"> AND suffix = #{suffix} </if>
 			<if test="status != null and status != ''"> AND status = #{status} </if>
+			<if test="dateTime != null and dateTime != ''"> AND dateTime = #{dateTime} </if>
 			<if test="what != null and what != ''"> AND what = #{what} </if>
 		</trim>
 	</select>

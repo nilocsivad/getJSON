@@ -29,6 +29,7 @@ public class Template extends __Model {
 	private Integer type; // 0->xml 1->
 	private String suffix; // 请求URL 最大程度 128 不能为空 varchar(128)
 	private Integer status; // 1->normal 0->deleted
+	private String dateTime; // 创建日期 char(19) yyyy-MM-dd HH:mm:ss
 	private String what; // 对应type指向的资源 长度未限制 tinytext
 
 
@@ -137,6 +138,20 @@ public class Template extends __Model {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	/**
+	 * @return the dateTime
+	 */
+	public String getDateTime() {
+		return dateTime;
+	}
+
+	/**
+	 * @param dateTime the dateTime to set
+	 */
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
 	}
 
 }

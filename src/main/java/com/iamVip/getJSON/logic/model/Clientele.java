@@ -28,6 +28,7 @@ public class Clientele extends __Model {
 	private String company; // 公司名称 最大程度 128 varchar(128)
 	private String link; // 公司网址 最大程度 128 varchar(128)
 	private Integer maxTemplate; // 拥有JSON模版数量 默认10 最大9999 tinyint(4)
+	private String dateTime; // 创建日期 char(19) yyyy-MM-dd HH:mm:ss
 	private Integer status; // 1->normal 0->deleted
 
 
@@ -136,6 +137,20 @@ public class Clientele extends __Model {
 	 */
 	public void setMaxTemplate(Integer maxTemplate) {
 		this.maxTemplate = maxTemplate;
+	}
+
+	/**
+	 * @return the dateTime
+	 */
+	public String getDateTime() {
+		return dateTime;
+	}
+
+	/**
+	 * @param dateTime the dateTime to set
+	 */
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
 	}
 
 }

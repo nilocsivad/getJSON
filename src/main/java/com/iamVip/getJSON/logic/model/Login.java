@@ -28,6 +28,7 @@ public class Login extends __Model {
 	private String password; // 密码 MD5加密存储 不能为空 char(32)
 	private Integer clientID;
 	private Integer type; // 1->Email 2->QQ 3->weibo 4->facebook 5->loginName
+	private String dateTime; // 创建日期 char(19) yyyy-MM-dd HH:mm:ss
 	private Integer status; // 1->normal 0->unauthorized 2->expired
 
 
@@ -129,6 +130,20 @@ public class Login extends __Model {
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	/**
+	 * @return the dateTime
+	 */
+	public String getDateTime() {
+		return dateTime;
+	}
+
+	/**
+	 * @param dateTime the dateTime to set
+	 */
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
 	}
 
 }

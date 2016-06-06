@@ -13,9 +13,9 @@
 	<insert id="insert" parameterMap="Clientele" keyProperty="clientID" keyColumn="clientID" useGeneratedKeys="true">
 		INSERT INTO
 		<include refid="TABLE_NAME" />
-		( clientName, company, link, maxTemplate, status )
+		( clientName, company, link, maxTemplate, dateTime, status )
 		VALUES
-		( #{clientName}, #{company}, #{link}, #{maxTemplate}, #{status} )
+		( #{clientName}, #{company}, #{link}, #{maxTemplate}, #{dateTime}, #{status} )
 	</insert>
 	<!-- <insert id="inserts"> INSERT INTO <include refid="TABLE_NAME" /> ( clientName, company, link, status ) VALUES <foreach collection="list" item="item" separator=","> ( #{clientName}, #{company}, #{link}, #{status} ) </foreach> </insert> -->
 
@@ -35,6 +35,7 @@
 			<if test="company != null and company != ''"> , company LIKE CONCAT( '%', '${company}', '%' ) </if>
 			<if test="link != null and link != ''"> , link LIKE CONCAT( '%', '${link}', '%' ) </if>
 			<if test="maxTemplate != null and maxTemplate != ''"> , maxTemplate = #{maxTemplate} </if>
+			<if test="dateTime != null and dateTime != ''"> , dateTime = #{dateTime} </if>
 			<if test="status != null and status != ''"> , status = #{status} </if>
 		</trim>
 		WHERE clientID = #{primaryKey}
@@ -50,6 +51,7 @@
 			<if test="company != null and company != ''"> AND company LIKE CONCAT( '%', '${company}', '%' ) </if>
 			<if test="link != null and link != ''"> AND link LIKE CONCAT( '%', '${link}', '%' ) </if>
 			<if test="maxTemplate != null and maxTemplate != ''"> AND maxTemplate = #{maxTemplate} </if>
+			<if test="dateTime != null and dateTime != ''"> AND dateTime = #{dateTime} </if>
 			<if test="status != null and status != ''"> AND status = #{status} </if>
 		</trim>
 	</select>
@@ -62,6 +64,7 @@
 			<if test="company != null and company != ''"> AND company = #{company} </if>
 			<if test="link != null and link != ''"> AND link = #{link} </if>
 			<if test="maxTemplate != null and maxTemplate != ''"> AND maxTemplate = #{maxTemplate} </if>
+			<if test="dateTime != null and dateTime != ''"> AND dateTime = #{dateTime} </if>
 			<if test="status != null and status != ''"> AND status = #{status} </if>
 		</trim>
 	</select>

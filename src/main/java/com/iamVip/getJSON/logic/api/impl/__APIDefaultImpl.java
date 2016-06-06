@@ -6,6 +6,7 @@ package com.iamVip.getJSON.logic.api.impl;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.iamVip.getJSON.database.access.layout.__IDBAPI;
 import com.iamVip.getJSON.logic.iapi.__IAPI;
@@ -32,7 +33,18 @@ public abstract class __APIDefaultImpl<T> implements __IAPI<T> {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public int insert(T one) {
-		return this.getDBApi().insert(one);
+		try {
+			return this.getDBApi().insert(one);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			if (TransactionAspectSupport.currentTransactionStatus().isNewTransaction()) {
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			} else {
+				throw e;
+			}
+		}
+		return 0;
 	}
 
 	/*
@@ -40,8 +52,20 @@ public abstract class __APIDefaultImpl<T> implements __IAPI<T> {
 	 * @see com.iamVip.getJSON.logic.iapi.__IAPI#inserts(java.util.List)
 	 */
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int inserts(List<T> list) {
-		return this.getDBApi().inserts(list);
+		try {
+			return this.getDBApi().inserts(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			if (TransactionAspectSupport.currentTransactionStatus().isNewTransaction()) {
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			} else {
+				throw e;
+			}
+		}
+		return 0;
 	}
 
 	/*
@@ -49,8 +73,20 @@ public abstract class __APIDefaultImpl<T> implements __IAPI<T> {
 	 * @see com.iamVip.getJSON.logic.iapi.__IAPI#deleteByKey(java.lang.Object)
 	 */
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int deleteByKey(Object primaryKey) {
-		return this.getDBApi().deleteByKey(primaryKey);
+		try {
+			return this.getDBApi().deleteByKey(primaryKey);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			if (TransactionAspectSupport.currentTransactionStatus().isNewTransaction()) {
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			} else {
+				throw e;
+			}
+		}
+		return 0;
 	}
 
 	/*
@@ -58,8 +94,20 @@ public abstract class __APIDefaultImpl<T> implements __IAPI<T> {
 	 * @see com.iamVip.getJSON.logic.iapi.__IAPI#deleteEq(java.lang.Object)
 	 */
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int deleteEq(T param) {
-		return this.getDBApi().deleteEq(param);
+		try {
+			return this.getDBApi().deleteEq(param);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			if (TransactionAspectSupport.currentTransactionStatus().isNewTransaction()) {
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			} else {
+				throw e;
+			}
+		}
+		return 0;
 	}
 
 	/*
@@ -68,8 +116,20 @@ public abstract class __APIDefaultImpl<T> implements __IAPI<T> {
 	 * java.lang.Object)
 	 */
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int updateByKey(Object primaryKey, T param) {
-		return this.getDBApi().updateByKey(primaryKey, param);
+		try {
+			return this.getDBApi().updateByKey(primaryKey, param);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			if (TransactionAspectSupport.currentTransactionStatus().isNewTransaction()) {
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			} else {
+				throw e;
+			}
+		}
+		return 0;
 	}
 
 	/*

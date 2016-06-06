@@ -22,6 +22,16 @@
 		<property name="password" value="${mysql.password}" />
 	</bean>
 
+
+
+	<context:component-scan base-package="com.iamVip.getJSON">
+		<context:exclude-filter type="regex" expression="com.iamVip.getJSON.request" />
+	</context:component-scan>
+
+	<context:annotation-config />
+
+
+
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="mysqlDataSource" />
 	</bean>
@@ -39,10 +49,10 @@
 			</list>
 		</property>
 	</bean>
-<!-- 
+
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory" ref="mysqlSessionFactory" />
-	</bean> -->
+	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="mysqlSessionFactory" />
