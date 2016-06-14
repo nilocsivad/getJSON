@@ -85,7 +85,8 @@ public class ClienteleApiImpl extends __APIDefaultImpl<Clientele> implements ICl
 				refMap.put("token", token);
 			}
 			return c;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}

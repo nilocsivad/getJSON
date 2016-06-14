@@ -46,10 +46,8 @@ public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapte
 		if (handler instanceof HandlerMethod) {
 
 			HandlerMethod method = (HandlerMethod) handler;
-			String className = method.getBean().getClass().getName(); // Controller
-																		 // 的类名
-			String methodName = method.getMethod().getName(); // Controller
-																 // 里执行的方法名称
+			String className = method.getBean().getClass().getName();
+			String methodName = method.getMethod().getName();
 			System.out.println("Execute " + className + "." + methodName);
 
 			{ // ** 过滤掉配置忽略的请求
@@ -77,6 +75,8 @@ public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapte
 				return this.controlURL(request, response, ONLINE_CLIENTELE);
 				// </facade-control-area>
 			}
+
+			return false;
 		}
 
 		return super.preHandle(request, response, handler);
@@ -89,7 +89,7 @@ public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapte
 	 * @throws IOException
 	 */
 	private boolean controlURL(HttpServletRequest request, HttpServletResponse response, String sessionKey) throws IOException {
-		
+
 		String contextPath = request.getContextPath();
 
 		HttpSession httpSession = request.getSession(false);

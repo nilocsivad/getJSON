@@ -5,6 +5,7 @@ package com.iamVip.getJSON.request.api;
 
 import org.junit.Test;
 
+import com.iamVip.getJSON.request.StringKVMap;
 import com.iamVip.getJSON.request.__RequestTest;
 
 /**
@@ -16,7 +17,11 @@ public class ClienteleApiRequestTest extends __RequestTest {
 	 * 
 	 */
 	public ClienteleApiRequestTest() {
-		super();
+	}
+
+	@Test
+	public void more() throws Exception {
+		this.executeHttp("/api/clientele/more", new StringKVMap().add("clientName", "123456").add("loginName", "12345").add("password", "333333").add("type", "5"));
 	}
 
 	@Test

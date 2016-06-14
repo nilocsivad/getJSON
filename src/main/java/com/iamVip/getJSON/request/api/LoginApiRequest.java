@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,7 +41,7 @@ public class LoginApiRequest extends __Request implements IAPP {
 
 	@ResponseBody
 	@RequestMapping(value = { "add" })
-	public Map<String, Object> add(HttpServletRequest request, HttpSession session, HttpServletResponse response, Login login) throws Exception {
+	public Map<String, Object> add(HttpServletRequest request, HttpSession session, HttpServletResponse response, ModelMap modelMap, Login login) throws Exception {
 
 		login.password2md5(); // 注册时密码用MD5加密
 		login.setClientID(10000);

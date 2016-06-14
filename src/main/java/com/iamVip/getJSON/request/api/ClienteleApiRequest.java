@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,20 +40,20 @@ public class ClienteleApiRequest extends __Request implements IAPP {
 
 	@ResponseBody
 	@RequestMapping(value = { "query" })
-	public Map<String, Object> queryLimit(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception {
+	public Map<String, Object> queryLimit(HttpServletRequest request, HttpSession session, HttpServletResponse response, ModelMap modelMap) throws Exception {
 		return super.queryLimit(request, response);
 	}
 
 	@ResponseBody
 	@RequestMapping(value = { "query/count" })
-	public long queryCount(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception {
+	public long queryCount(HttpServletRequest request, HttpSession session, HttpServletResponse response, ModelMap modelMap) throws Exception {
 		clienteleApi.queryLimit(null, null);
 		return System.currentTimeMillis();
 	}
 
 	@ResponseBody
 	@RequestMapping(value = { "more" })
-	public Map<String, Object> moreClientele(HttpServletRequest request, HttpSession session, HttpServletResponse response, Clientele client, Login login) throws Exception {
+	public Map<String, Object> moreClientele(HttpServletRequest request, HttpSession session, HttpServletResponse response, ModelMap modelMap, Clientele client, Login login) throws Exception {
 
 		Map<String, Object> refMap = new HashMap<String, Object>(3);
 		int r = clienteleApi.moreClientele(client, login, refMap);

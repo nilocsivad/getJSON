@@ -45,4 +45,14 @@ public class __Request implements IAPP {
 		return map;
 	}
 
+	/**
+	 * @param request
+	 * @param find
+	 * @return
+	 */
+	protected String getSuffixOfURL(HttpServletRequest request, String find) {
+		String uri = request.getRequestURI();
+		return uri.substring(uri.indexOf(find) + find.length());
+	}
+
 }

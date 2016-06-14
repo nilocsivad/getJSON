@@ -96,7 +96,8 @@
 	<bean class="com.iamVip.getJSON.rs.util.MethodUtil" scope="singleton">
 		<constructor-arg name="ignores">
 			<list value-type="java.lang.String">
-				<value>com.iam_vip.test.mysql_cluster.control.handle.*</value>
+				<value>com.iamVip.getJSON.request.api.*</value>
+				<value>com.iamVip.getJSON.request.web.HomeWebRequest.*</value>
 			</list>
 		</constructor-arg>
 	</bean>

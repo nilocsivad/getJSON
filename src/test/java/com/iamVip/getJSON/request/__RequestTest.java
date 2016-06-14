@@ -48,6 +48,15 @@ public class __RequestTest {
 
 	/**
 	 * @param url
+	 * @param params com.iamVip.getJSON.request.StringKVMap
+	 * @throws Exception
+	 */
+	protected void executeHttp(String url, StringKVMap params) throws Exception {
+		this.executeHttp(url, 0, params);
+	}
+
+	/**
+	 * @param url
 	 * @param type get(0) post(1)
 	 * @throws Exception
 	 */
