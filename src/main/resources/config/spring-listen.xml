@@ -23,13 +23,13 @@
 	</bean>
 
 
-
+<!-- 
 	<context:component-scan base-package="com.iamVip.getJSON">
 		<context:exclude-filter type="regex" expression="com.iamVip.getJSON.request" />
 	</context:component-scan>
 
 	<context:annotation-config />
-
+ -->
 
 
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
