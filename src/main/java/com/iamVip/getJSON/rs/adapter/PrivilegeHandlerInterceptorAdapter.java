@@ -36,19 +36,18 @@ public class PrivilegeHandlerInterceptorAdapter extends HandlerInterceptorAdapte
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-		StringBuffer buf = new StringBuffer();
-		buf.append("RequestURI " + request.getRequestURI() + LINE);
-		buf.append("RequestURL " + request.getRequestURL() + LINE);
-		System.out.println(buf);
-
 		// ** 匹配到需要拦截的 URL
-
 		if (handler instanceof HandlerMethod) {
 
 			HandlerMethod method = (HandlerMethod) handler;
 			String className = method.getBean().getClass().getName();
 			String methodName = method.getMethod().getName();
-			System.out.println("Execute " + className + "." + methodName);
+			
+			StringBuffer buf = new StringBuffer();
+			buf.append("RequestURI " + request.getRequestURI() + LINE);
+			//buf.append("RequestURL " + request.getRequestURL() + LINE);
+			buf.append("Execute " + className + "." + methodName);
+			System.out.println(buf);
 
 			{ // ** 过滤掉配置忽略的请求
 				boolean ignore = false;

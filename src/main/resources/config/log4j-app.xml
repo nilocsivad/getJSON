@@ -13,7 +13,7 @@
 
 	<appender name="DailyLog4j" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="threshold" value="warn" />
-		<param name="file" value="${catalina.home}/logs/test.mysql-cluster/test.mysql-cluster-log.log" />
+		<param name="file" value="${catalina.home}/logs/getJSON/getJSON-log.log" />
 		<param name="append" value="true" />
 		<param name="datePattern" value="'.'yyyy-MM-dd'.log'" />
 		<layout class="org.apache.log4j.PatternLayout">
